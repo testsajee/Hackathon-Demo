@@ -35,7 +35,6 @@ def grid():
 
 def tap(x, y):
     """Draw red or yellow circle in tapped row."""
-    player = state['player']
     rows = state['rows']
 
     row = int((x + 200) // 50)
@@ -62,7 +61,6 @@ def login():
 
     username = request.args["username"]
     password = request.args["password"]
-    group = request.args["group"]
 
     dynamodb.scan(
         FilterExpression= "username = " + username + " and password = " + password,
