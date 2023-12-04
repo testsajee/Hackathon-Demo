@@ -53,10 +53,10 @@ jobs:
           --data-raw $PULL_URL)
 
           for i in 1 2 3 4 5
+          do
+            if $response == $PULL_URL
+            do
             echo "Mendax Current number: $i"
-            echo "Mendax Current response: $response"
-            if $response == $PULL_URL; then
-            echo "yes"
-            else
-            echo "no"
+            done
+          done
 
