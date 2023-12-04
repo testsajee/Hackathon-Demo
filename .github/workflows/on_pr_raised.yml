@@ -52,11 +52,13 @@ jobs:
           --header 'Content-Type: text/plain' \
           --data-raw $PULL_URL)
 
+          RESPONSE_SENT=NO
           for i in 1 2 3 4 5
           do
             echo "Mendax Current number: $response"
-            if [ $response == $PULL_URL ]; then
+            if [ $response == $PULL_URL && $RESPONSE_SENT != 'NO']; then
             echo "yes"
+            RESPONSE_SENT=YES
             else
             echo "nono"
             fi
