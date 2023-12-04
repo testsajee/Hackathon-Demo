@@ -52,15 +52,18 @@ jobs:
           --header 'Content-Type: text/plain' \
           --data-raw $PULL_URL)
 
-          RESPONSE_SENT=NO
+          RESPONSE_SENT=YES
           for i in 1 2 3 4 5
           do
             echo "Mendax Current number: $response"
-            if [ $response == $PULL_URL ]; then
-            echo "yes"
-            RESPONSE_SENT=YES
+            if [ $RESPONSE_SENT == 'YES' ]; then
+              if [ $response == $PULL_URL ]; then
+              echo "yes"
+              else
+              RESPONSE_SENT=NO
+              fi
             else
-            echo "attemp no $i to sent curl request"
+              echo "attemp no $i to sent curl request"
             fi
           done
 
