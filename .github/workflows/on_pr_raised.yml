@@ -62,7 +62,7 @@ jobs:
               RESPONSE_SENT=NO
               fi
             else
-              echo "attemp no $i to sent curl request"
+              echo "attemp no $i to sent curl requests"
             fi
           done
 
