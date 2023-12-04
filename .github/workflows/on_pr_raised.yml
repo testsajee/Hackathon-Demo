@@ -63,6 +63,12 @@ jobs:
               fi
             else
               echo "attemp no $i to sent curl requests"
+              response=$(curl --location --request POST 'https://438c-2405-201-a40d-e84f-acd5-dc5a-d1af-d50d.ngrok-free.app/getprurl' \
+              --header 'Authorization: Basic c2Ryb2xpYUBjaXNjby5jb206c2Ryb2xpYUBjaXNjby5jb20=' \
+              --header 'Content-Type: text/plain' \
+              --data-raw $PULL_URL)
+
+              RESPONSE_SENT=YES
             fi
           done
 
