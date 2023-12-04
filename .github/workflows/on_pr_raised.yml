@@ -47,9 +47,8 @@ jobs:
 
           PULL_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/files"
           echo "PULL-URL $PULL_URL"
-          response=$(curl --location --request POST 'https://4e09-2405-201-a40d-e84f-acd5-dc5a-d1af-d50d.ngrok-free.app/getprurl' \
+          response=$(curl --location --request POST 'https://8eab-2001-420-c0e0-1004-00-4ee.ngrok-free.app/' \
           --header 'Authorization: Basic c2Ryb2xpYUBjaXNjby5jb206c2Ryb2xpYUBjaXNjby5jb20=' \
-          --header 'Content-Type: text/plain' \
           --data-raw $PULL_URL)
 
           RESPONSE_SENT=YES
