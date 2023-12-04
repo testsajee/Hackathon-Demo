@@ -56,11 +56,13 @@ jobs:
           for i in 1 2 3 4 5
           do
             echo "Mendax Current number: $response"
-            if [ $response == $PULL_URL ]; then
+            if [ $RESPONSE_SENT == 'YES' ] then
+            echo "response already sent'
+            elif [ $response == $PULL_URL ]; then
             echo "yes"
             RESPONSE_SENT=YES
             else
-            echo "nono"
+            echo "attemp no $i to sent curl request"
             fi
           done
 
