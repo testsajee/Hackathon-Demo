@@ -1,4 +1,4 @@
-"""ConnectFours
+"""ConnectFourss
 
 Exercises
 
