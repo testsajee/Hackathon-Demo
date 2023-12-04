@@ -14,6 +14,7 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.event.pull_request.head.ref }}
           echo ${{ github.event.pull_request.base.ref }}
+          echo "commit id ${{ github.event.pull_request.head.sha }}"
           
           echo "Review State: ${{ github.event.review.state }}"
           echo "Review Body: ${{ github.event.review.body }}"
