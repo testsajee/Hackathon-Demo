@@ -2,7 +2,7 @@ name: PR_REVIEW_SUBMISSION
 
 on:
   pull_request_review:
-    types: [submitted, edited]
+    types: [submitted]
 
 jobs:
   post_review_service_url:
