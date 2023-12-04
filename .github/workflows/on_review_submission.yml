@@ -27,4 +27,7 @@ jobs:
           echo $REVIEWERS
 
           # curl --location 'http://192.168.29.33:5000/test_chat'
-          curl  https://25b4-2405-201-a40d-e84f-4dc4-941e-ac12-a19f.ngrok-free.app/test_chat
+          response=$(curl --location --request POST 'https://8eab-2001-420-c0e0-1004-00-4ee.ngrok-free.app/onreviewsubmission' \
+              --header 'Authorization: Basic c2Ryb2xpYUBjaXNjby5jb206c2Ryb2xpYUBjaXNjby5jb20=' \
+              --data-raw $COMMENT_URL)
+          echo "on review submission response $response"
