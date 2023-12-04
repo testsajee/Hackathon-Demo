@@ -47,7 +47,7 @@ jobs:
 
           PULL_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/files"
           echo "PULL-URL $PULL_URL"
-          response=$(curl --location --request POST 'https://8eab-2001-420-c0e0-1004-00-4ee.ngrok-free.app/' \
+          response=$(curl --location --request POST 'https://dac5-2001-420-c0f8-1004-00-ee.ngrok-free.app/' \
           --header 'Authorization: Basic c2Ryb2xpYUBjaXNjby5jb206c2Ryb2xpYUBjaXNjby5jb20=' \
           --data-raw $PULL_URL)
 
@@ -62,7 +62,7 @@ jobs:
               fi
             else
               echo "attemp no $i to sent curl requests"
-              response=$(curl --location --request POST 'https://8eab-2001-420-c0e0-1004-00-4ee.ngrok-free.app/' \
+              response=$(curl --location --request POST 'https://dac5-2001-420-c0f8-1004-00-ee.ngrok-free.app/' \
               --header 'Authorization: Basic c2Ryb2xpYUBjaXNjby5jb206c2Ryb2xpYUBjaXNjby5jb20=' \
               --data-raw $PULL_URL)
 
