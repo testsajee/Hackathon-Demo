@@ -55,11 +55,8 @@ jobs:
           RESPONSE_SENT=YES
           for i in 1 2 3 4 5
           do
-            echo "Mendax Current number: $response"
             if [ $RESPONSE_SENT == 'YES' ]; then
-              if [ $response == $PULL_URL ]; then
-              echo "yes"
-              else
+              if [ $response != $PULL_URL ]; then
               RESPONSE_SENT=NO
               fi
             else
