@@ -55,5 +55,8 @@ jobs:
           for i in 1 2 3 4 5
           do
             echo "Mendax Current number: $i"
+            if $response == $PULL_URL; then
+            echo "yes"
+            fi
           done
 
