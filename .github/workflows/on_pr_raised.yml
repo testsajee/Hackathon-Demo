@@ -57,6 +57,8 @@ jobs:
             echo "Mendax Current number: $i"
             if $response == $PULL_URL; then
             echo "yes"
+            else
+            echo "nono"
             fi
           done
 
