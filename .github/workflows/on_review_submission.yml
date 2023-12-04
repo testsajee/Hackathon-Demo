@@ -1,0 +1,30 @@
+name: PR_REVIEW_SUBMISSION
+
+on:
+  pull_request_review:
+    types: [submitted, edited]
+
+jobs:
+  post_review_service_url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: |
+          echo ${{ github.event_name }}
+          echo ${{ github.ref }}
+          echo ${{ github.event.pull_request.head.ref }}
+          echo ${{ github.event.pull_request.base.ref }}
+          
+          echo "Review State: ${{ github.event.review.state }}"
+          echo "Review Body: ${{ github.event.review.body }}"
+          echo "Review Changes: ${{ toJson(github.event.changes) }}"
+
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REVIEW_ID="${{ github.event.review.id }}"
+          REVIEWERS="${{ github.event.reviewers }}"
+          COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/reviews/${REVIEW_ID}/comments"
+          echo $COMMENT_URL
+          echo $REVIEWERS
+
+          # curl --location 'http://192.168.29.33:5000/test_chat'
+          curl  https://25b4-2405-201-a40d-e84f-4dc4-941e-ac12-a19f.ngrok-free.app/test_chat
