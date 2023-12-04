@@ -1,104 +1,79 @@
-"""Pong, classic arcade game.
+"""Connect Four
 
 Exercises
 
 1. Change the colors.
-2. What is the frame rate? Make it faster or slower.
-3. Change the speed of the ball.
-4. Change the size of the paddles.
-5. Change how the ball bounces off walls.
-6. How would you add a computer player?
-6. Add a second ball.
+2. Draw squares instead of circles for open spaces.
+3. Add logic to detect a full row.
+4. Create a random computer player.
+5. How would you detect a winner?
 """
 
-from random import choice, random
 from turtle import *
 
-from freegames import vector
+from freegames import line
+
+turns = {'red': 'yellow', 'yellow': 'red'}
+state = {'player': 'yellow', 'rows': [0] * 8}
 
 
-def value():
-    """Randomly generate value between (-5, -3) or (3, 5)."""
-    return (3 + random() * 2) * choice([1, -1])
+def grid():
+    """Draw Connect Four grid."""
+    bgcolor('light blue')
 
+    for x in range(-150, 200, 50):
+        line(x, -200, x, 200)
 
-ball = vector(0, 0)
-aim = vector(value(), value())
-state = {1: 0, 2: 0}
+    for x in range(-175, 200, 50):
+        for y in range(-175, 200, 50):
+            up()
+            goto(x, y)
+            dot(40, 'white')
 
-def remove_item():
-    numbers = list(range(1, 50))
-
-    for i in numbers:
-        if i < 20:
-            numbers.remove(i)
-            
-        
-def move(player, change):
-    """Move player position by change."""
-    state[player] += change
-
-
-def rectangle(x, y, width, height):
-    """Draw rectangle at (x, y) with given width and height."""
-    up()
-    goto(x, y)
-    down()
-    begin_fill()
-    for count in range(2):
-        forward(width)
-        left(90)
-        forward(height)
-        left(90)
-    end_fill()
-
-
-def draw():
-    """Draw game and move pong ball."""
-    clear()
-    rectangle(-200, state[1], 10, 50)
-    rectangle(190, state[2], 10, 50)
-
-    ball.move(aim)
-    x = ball.x
-    y = ball.y
-
-    up()
-    goto(x, y)
-    dot(10)
     update()
 
-    if y < -200 or y > 200:
-        aim.y = -aim.y
 
-    if x < -185:
-        low = state[1]
-        high = state[1] + 50
+def tap(x, y):
+    """Draw red or yellow circle in tapped row."""
+    player = state['player']
+    rows = state['rows']
 
-        if low <= y <= high:
-            aim.x = -aim.x
-        else:
-            return
+    row = int((x + 200) // 50)
+    count = rows[row]
 
-    if x > 185:
-        low = state[2]
-        high = state[2] + 50
+    x = ((x + 200) // 50) * 50 - 200 + 25
+    y = count * 50 - 200 + 25
 
-        if low <= y <= high:
-            aim.x = -aim.x
-        else:
-            return
+    up()
+    goto(x, y)
+    dot(40, player)
+    update()
 
-    ontimer(draw, 50)
+    rows[row] = count + 1
+    state['player'] = turns[player]
+
+
+"""
+Adding the route for login dynamodb
+"""
+@app.route('/login')
+def login():
+    dynamodb = AWS_SESSION.client('dynamodb')
+
+    username = request.args["username"]
+    password = request.args["password"]
+    group = request.args["group"]
+
+    dynamodb.scan(
+        FilterExpression= "username = " + username + " and password = " + password,
+        TableName="users",
+        ProjectionExpression="username"
+    )
 
 
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
-listen()
-onkey(lambda: move(1, 20), 'w')
-onkey(lambda: move(1, -20), 's')
-onkey(lambda: move(2, 20), 'i')
-onkey(lambda: move(2, -20), 'k')
-draw()
+grid()
+onscreenclick(tap)
 done()
