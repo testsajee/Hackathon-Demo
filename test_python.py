@@ -71,7 +71,7 @@ def login():
     )
 
 
-setup(420, 420, 370, 0)
+setup(420, 421, 370, 0)
 hideturtle()
 tracer(False)
 grid()
